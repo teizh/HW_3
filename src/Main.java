@@ -1,5 +1,5 @@
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LimitException {
 
         BankAccount optima = new BankAccount(20000);
         while (true) {
@@ -9,9 +9,11 @@ public class Main {
                         " Remaining amount: "+optima.getAmount()+ " som.");
             } catch (LimitException le) {
                 System.out.println(le.getMessage());
+                optima.withDraw((int) le.getRemainingAmount());
                 System.out.println("Successful withdrawal of "+ le.getRemainingAmount());
                 break;
             }
         }
+        System.out.println("Remaining amount "+optima.getAmount()+ " som");
     }
 }
